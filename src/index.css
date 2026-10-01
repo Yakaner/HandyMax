@@ -327,7 +327,50 @@ p {
   display: flex;
   flex-direction: column;
   background: var(--c-gray-900);
-  transition: flex-grow 0.6s var(--ease);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 14px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 20px 40px -20px rgba(0, 0, 0, 0.8);
+  transition: flex-grow 0.6s var(--ease), border-color 0.4s var(--ease);
+}
+
+/* 빛 반사(sheen) — 활성 카드에 한 번 훑고 지나감 */
+.explore-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.16) 50%, transparent 65%);
+  transform: translateX(-120%);
+}
+
+.explore-card.is-active {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.explore-card.is-active::after {
+  animation: sheen 1.2s var(--ease) 0.15s;
+}
+
+@keyframes sheen {
+  to {
+    transform: translateX(120%);
+  }
+}
+
+/* 스크롤 진입 시 카드 순차 등장 (미지원 브라우저는 그냥 보임) */
+@supports (animation-timeline: view()) {
+  .explore-card {
+    animation: fade-up linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 70%;
+  }
+
+  .explore-card:nth-child(2) { animation-range: entry 8% entry 78%; }
+  .explore-card:nth-child(3) { animation-range: entry 16% entry 86%; }
+  .explore-card:nth-child(4) { animation-range: entry 24% entry 94%; }
+  .explore-card:nth-child(5) { animation-range: entry 32% cover 30%; }
+  .explore-card:nth-child(6) { animation-range: entry 40% cover 35%; }
 }
 
 .explore-card.is-active {
@@ -399,18 +442,27 @@ p {
 
 .explore-card__arrow {
   position: relative;
-  margin: auto 22px 24px;
-  align-self: flex-start;
-  transition: transform 0.3s var(--ease);
-}
-
-.explore-card.is-active .explore-card__arrow {
-  margin-top: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  margin: auto auto 22px;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  transition: transform 0.3s var(--ease), background-color 0.3s var(--ease), color 0.3s var(--ease);
 }
 
 .explore-card:hover .explore-card__arrow {
-  transform: translateX(4px);
+  background: var(--c-white);
+  color: var(--c-black);
 }
+
+.explore-card.is-active .explore-card__arrow {
+  margin: 0 0 22px 22px;
+}
+
 
 /* ---------- CTA ---------- */
 .cta {

@@ -38,7 +38,7 @@ export default function Explore() {
               </p>
             </div>
             <span className="explore-card__arrow">
-              <ArrowIcon size={22} />
+              <ArrowIcon size={16} />
             </span>
           </a>
         ))}
