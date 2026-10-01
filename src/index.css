@@ -382,7 +382,7 @@ p {
   inset: 0;
   background-size: cover;
   background-position: center;
-  filter: grayscale(0.25) brightness(0.8);
+  filter: grayscale(1) brightness(0.75);
   transition: transform 0.8s var(--ease), filter 0.6s var(--ease);
 }
 
