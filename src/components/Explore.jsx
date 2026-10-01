@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router'
 import { exploreItems } from '../siteData'
 import { ArrowIcon } from './Icons'
 
@@ -14,9 +15,9 @@ export default function Explore() {
 
       <div className="container explore__list">
         {exploreItems.map((item, i) => (
-          <a
+          <Link
             key={item.no}
-            href={item.href}
+            to={item.href}
             className={`explore-card${i === active ? ' is-active' : ''}`}
             onMouseEnter={() => setActive(i)}
             onFocus={() => setActive(i)}
@@ -40,7 +41,7 @@ export default function Explore() {
             <span className="explore-card__arrow">
               <ArrowIcon size={16} />
             </span>
-          </a>
+          </Link>
         ))}
       </div>
     </section>

@@ -1,30 +1,25 @@
-import { footerLinks, navItems } from '../siteData'
-import { SearchIcon } from './Icons'
+import { Link } from 'react-router'
+import { navItems, policyLinks } from '../siteData'
 
 export default function Footer() {
   return (
     <footer className="footer">
       <div className="container footer__inner">
-        <a href="/" className="logo logo--sm">HandyMax</a>
+        <Link to="/" className="logo logo--sm">HandyMax</Link>
 
         <nav className="footer__nav" aria-label="하단 메뉴">
           {navItems.map((item) => (
-            <a key={item.label} href={item.href}>{item.label}</a>
+            <Link key={item.label} to={item.href}>{item.label}</Link>
           ))}
         </nav>
 
         <div className="footer__utils">
-          {footerLinks.map((item) => (
-            <a key={item.label} href={item.href}>{item.label}</a>
+          {policyLinks.map((item) => (
+            <Link key={item.label} to={item.href}>{item.label}</Link>
           ))}
-          <button type="button" className="icon-btn" aria-label="검색">
-            <SearchIcon size={18} />
-          </button>
         </div>
       </div>
-      <div className="container footer__copy">
-        © 2026 HandyMax. All rights reserved.
-      </div>
+      <div className="container footer__copy">© 2026 HandyMax. All rights reserved.</div>
     </footer>
   )
 }

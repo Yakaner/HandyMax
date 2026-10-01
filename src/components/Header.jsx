@@ -1,8 +1,13 @@
 import { useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router'
 import { navItems } from '../siteData'
-import { SearchIcon } from './Icons'
+import Icon, { SearchIcon } from './Icons'
 
 export default function Header() {
+  const { pathname } = useLocation()
+  const isHome = pathname === '/'
+  // ponytail: 로그인 상태는 계정 페이지 여부로만 판단 — 실제 인증 붙일 때 교체
+  const signedIn = pathname.startsWith('/account') || pathname.startsWith('/checkout')
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -13,25 +18,31 @@ export default function Header() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  return (
-    <header className={`header${scrolled ? ' is-scrolled' : ''}${menuOpen ? ' is-open' : ''}`}>
-      <div className="container header__inner">
-        <a href="/" className="logo">HandyMax</a>
+  const cls = ['header', (scrolled || !isHome) && 'is-scrolled', !isHome && 'is-solid', menuOpen && 'is-open']
 
-        <nav className="header__nav" aria-label="주 메뉴">
+  return (
+    <header className={cls.filter(Boolean).join(' ')}>
+      <div className="container header__inner">
+        <Link to="/" className="logo">HandyMax</Link>
+
+        <nav className="header__nav" aria-label="주 메뉴" onClick={() => setMenuOpen(false)}>
           {navItems.map((item) => (
-            <a key={item.label} href={item.href} onClick={() => setMenuOpen(false)}>
-              {item.label}
-            </a>
+            <Link key={item.label} to={item.href}>{item.label}</Link>
           ))}
         </nav>
 
         <div className="header__utils">
-          <button type="button" className="icon-btn" aria-label="검색">
+          <Link to="/support" className="icon-btn" aria-label="검색">
             <SearchIcon />
-          </button>
+          </Link>
           <span className="header__divider" aria-hidden="true" />
-          <a href="#login" className="header__login">로그인</a>
+          {signedIn ? (
+            <Link to="/account" className="header__login header__account">
+              내 계정 <Icon name="user" size={18} />
+            </Link>
+          ) : (
+            <Link to="/login" className="header__login">로그인</Link>
+          )}
           <button
             type="button"
             className="header__burger"
