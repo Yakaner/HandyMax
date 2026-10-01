@@ -2,13 +2,12 @@ import exhibits from './assets/images/exhibits.webp'
 import modelPro from './assets/images/model-pro.webp'
 import guide from './assets/images/guide.webp'
 import support from './assets/images/support.webp'
+import hero from './assets/images/hero.webp'
+import interiors from './assets/images/interiors.webp'
+import update from './assets/images/update.webp'
 
-// 원본을 아직 받지 못한 이미지는 null 로 두면 톤에 맞는 그라데이션이 대신 표시됩니다.
-// 받으면 src/assets/images 에 넣고 import 해서 교체하세요.
-//  - hero: 메인 비주얼(곡선 금속 파사드 건축물)
-//  - Interiors: 거실 인테리어
-//  - 업데이트: 콘크리트 계단/벽
-export const heroImage = null
+// image 가 null 이면 톤에 맞는 그라데이션이 대신 표시됩니다.
+export const heroImage = hero
 
 export const navItems = [
   { label: '제품', href: '#products' },
@@ -21,7 +20,7 @@ export const exploreItems = [
     no: '01',
     title: 'Interiors',
     desc: ['아이디어를 현실로,', '공간을 더 쉽게.'],
-    image: null,
+    image: interiors,
     href: '#interiors',
   },
   {
@@ -49,7 +48,7 @@ export const exploreItems = [
     no: '05',
     title: '업데이트',
     desc: ['새로운 기능과', '개선 사항을 확인하세요.'],
-    image: null,
+    image: update,
     href: '#update',
   },
   {
