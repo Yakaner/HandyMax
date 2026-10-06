@@ -16,13 +16,13 @@ function matchPassword(form) {
 export function Login() {
   const navigate = useNavigate()
   return (
-    <div className="split">
-      <div className="split__media" style={{ backgroundImage: `url(${stone})` }}>
-        <p className="split__brand">HandyMax</p>
-        <p className="split__lead">다음 작업을 이어가세요.</p>
-      </div>
-      <div className="split__body">
-        <form className="form" onSubmit={(e) => { e.preventDefault(); navigate('/account') }}>
+    <div className="login" style={{ '--login-bg': `url(${stone})` }}>
+      <div className="container login__inner">
+        <div className="login__card" style={{ backgroundImage: `url(${stone})` }}>
+          <p className="login__brand">HandyMax</p>
+          <p className="login__lead">다음 작업을 이어가세요.</p>
+        </div>
+        <form className="form login__glass" onSubmit={(e) => { e.preventDefault(); navigate('/account') }}>
           <h1 className="page-title page-title--sm">로그인</h1>
           <p className="page-desc">HandyMax 계정으로 시작하세요.</p>
           <Field label="이메일" type="email" name="email" placeholder="name@example.com" autoComplete="email" required />
@@ -33,7 +33,7 @@ export function Login() {
             </label>
             <Link to="/reset-password" className="u">비밀번호 찾기</Link>
           </div>
-          <button className="btn btn--light btn--block">로그인</button>
+          <button className="btn btn--light btn--block">로그인 <Icon name="arrow" size={18} /></button>
           <p className="form__foot">
             아직 계정이 없으신가요? <Link to="/signup" className="u">회원가입</Link>
           </p>
