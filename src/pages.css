@@ -9,8 +9,14 @@
   --radius: 4px;
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+
 main {
-  min-height: 70vh;
+  flex: 1;
   background: var(--c-ink);
 }
 
@@ -226,7 +232,8 @@ input[type='file'].input {
   padding-right: 44px;
 }
 
-.select:invalid {
+.select:invalid,
+.select:has(option[value='']:checked) {
   color: #6f6f76;
 }
 
@@ -542,6 +549,10 @@ input[type='file'].input {
   border-bottom: 1px solid var(--line);
 }
 
+.block:last-child {
+  border-bottom: 0;
+}
+
 .block__title {
   font-size: 20px;
   font-weight: 700;
@@ -643,6 +654,11 @@ input[type='file'].input {
 
 .summary .info-list > div {
   grid-template-columns: 1fr auto;
+}
+
+.summary__total > div + div dt {
+  color: var(--text-2);
+  font-weight: 400;
 }
 
 .summary__total dt {
@@ -773,8 +789,6 @@ input[type='file'].input {
   top: var(--header-h);
   align-self: start;
   padding: 40px 24px 40px var(--gutter);
-  border-right: 1px solid var(--line);
-  min-height: calc(100svh - var(--header-h));
 }
 
 .side nav {
@@ -819,6 +833,8 @@ input[type='file'].input {
 }
 
 .with-side__body {
+  min-height: calc(100svh - var(--header-h));
+  border-left: 1px solid var(--line);
   padding: 48px 0 96px clamp(24px, 4vw, 56px);
   padding-right: var(--gutter);
 }
@@ -1159,11 +1175,15 @@ input[type='file'].input {
 
 .setting__row {
   display: grid;
-  grid-template-columns: 160px 1fr auto;
+  grid-template-columns: 160px 1fr 150px;
   align-items: center;
   gap: 24px;
   margin-top: 16px;
   font-size: 15px;
+}
+
+.setting__row > :last-child {
+  justify-self: end;
 }
 
 .setting__value {
@@ -1570,6 +1590,17 @@ input[type='file'].input {
     white-space: nowrap;
   }
 
+  .footer__nav,
+  .footer__utils {
+    flex-wrap: wrap;
+    gap: 8px 18px;
+  }
+
+  .footer__nav a + a::before,
+  .footer__utils a + a::before {
+    display: none;
+  }
+
   .login__inner {
     gap: 32px;
     padding-top: calc(var(--header-h) + 40px);
@@ -1622,6 +1653,8 @@ input[type='file'].input {
   }
 
   .with-side__body {
+    min-height: 0;
+    border-left: 0;
     padding: 32px var(--gutter) 72px;
   }
 
@@ -1673,6 +1706,10 @@ input[type='file'].input {
   .setting__row {
     grid-template-columns: 1fr;
     gap: 10px;
+  }
+
+  .setting__row > :last-child {
+    justify-self: start;
   }
 
   .help {
