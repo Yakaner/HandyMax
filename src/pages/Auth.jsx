@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router'
 import Icon from '../components/Icons'
 import { Breadcrumb, Field, PageHead, PasswordField } from '../components/ui'
-import stone from '../assets/images/update.webp'
 import interiors from '../assets/images/interiors.webp'
 import hero from '../assets/images/hero.webp'
 
@@ -16,11 +15,13 @@ function matchPassword(form) {
 export function Login() {
   const navigate = useNavigate()
   return (
-    <div className="login" style={{ '--login-bg': `url(${stone})` }}>
+    <div className="login" style={{ backgroundImage: `url(${hero})` }}>
       <div className="container login__inner">
-        <div className="login__card" style={{ backgroundImage: `url(${stone})` }}>
+        <div className="login__intro">
+          <p className="eyebrow">Welcome back</p>
           <p className="login__brand">HandyMax</p>
           <p className="login__lead">다음 작업을 이어가세요.</p>
+          <Link to="/#explore" className="btn btn--line">제품 살펴보기 <Icon name="arrow" size={18} /></Link>
         </div>
         <form className="form login__glass" onSubmit={(e) => { e.preventDefault(); navigate('/account') }}>
           <h1 className="page-title page-title--sm">로그인</h1>
